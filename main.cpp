@@ -1,4 +1,5 @@
-#include "robotgpio.hpp"
+#include "robotgpio.hpp"   //GPIO controls for robot
+#include "myvideo.h"
 #include <iostream>
 #include <unistd.h>
 #include <boost/asio.hpp>
@@ -14,16 +15,27 @@ std::string tcp_read(tcp::socket& socket) {
 }
 
 int main(int argv, char** argc){
+   /* Initialize GPIO for robot */
    RobotGpio my_robot;
    my_robot.init();
 
+   /* Socket initialization */
    boost::asio::io_service my_service;
    tcp::acceptor my_acceptor(my_service, tcp::endpoint(tcp::v4(), 1000));
    tcp::socket my_socket(my_service);
    my_acceptor.accept(my_socket);
+
+   /* Video stream initialization and start */
+   if(create_video_pipeline() == -1){
+      std::cout << "Pipeline creation failed!\n" << std::endl;
+   } else {
+      start_video_pipeline();
+   }
+
+   /* Simple TCP message parcer */
    while(1){
       std::string message = tcp_read(my_socket);
-      //std::cout << message << std::endl;
+
       if(!message.empty()) {
           if(message.compare("LP") == 0){
              std::cout << "command:LP\r\n" << std::endl;
@@ -53,6 +65,7 @@ int main(int argv, char** argc){
           message.clear();
       }
    }
+   /* release GPIO control */
    my_robot.release_lines();
 
    return 0;
