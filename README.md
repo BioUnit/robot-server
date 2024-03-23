@@ -20,3 +20,10 @@ g++ main.cpp robotgpio.cpp -lgpiodcxx
 
 # how to run
 sudo ./a.out
+
+# Youtube tutorial commits bindings
+To be able to see exact source code please use : 
+- git checkout COMMIT_NUMBER_YOU_NEED
+
+Youtube tutorials bindings:
+- How to use GPIO in C and C++ applications on Banana Pi (Armbian) -> git checkout 37b72a640607d54128e420fb349d336eee941d58
