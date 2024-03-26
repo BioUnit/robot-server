@@ -19,9 +19,8 @@ C++ language version
 - Gstreamer (use instruction from here to install: https://gstreamer.freedesktop.org/documentation/installing/on-linux.html?gi-language=c )
 
 # How to compile
-Add paths to environment variables:
+Add paths to GCC environment variable:
 - export CPATH=/usr/include/gstreamer-1.0/:/usr/include/glib-2.0/:/usr/lib/arm-linux-gnueabihf/glib-2.0/include/
-- export LIBRARY_PATH=/usr/lib/arm-linux-gnueabihf/:/usr/lib/arm-linux-gnueabihf/gstreamer1.0/:/usr/lib/arm-linux-gnueabihf/pkgconfig/
 Compile:
 - g++ -g main.cpp robotgpio.cpp myvideo.c -lgstreamer-1.0 -lglib-2.0 -lgobject-2.0 -lgpiodcxx
 
