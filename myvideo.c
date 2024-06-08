@@ -60,7 +60,7 @@ int create_video_pipeline(void){
    } else {
       g_print("Sink: OK\n");
    }
-   g_object_set(sink, "host", "192.168.0.105", "port", 5000, NULL);
+   g_object_set(sink, "host", VIDEO_IPV4, "port", VIDEO_PORT, NULL);
 
    return 1;
 }
